@@ -19,7 +19,6 @@ var numGuess
 var wins = 0
 
 document.onkeypress = function(event) {
-    // Make sure key pressed is an alpha character
     if (isAlpha(event.key) && !pauseGame) {
         checkForLetter(event.key.toUpperCase())
     }
