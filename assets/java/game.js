@@ -10,9 +10,9 @@ var questions = [
   console.log(questions)
 
 const maxGuess = 3
-var pauseGame = false
 
-var guessedLetters = []
+var pauseGame = false
+var answeredQuestions = []
 var guessingWord = []
 var wordToMatch
 var numGuess
@@ -24,6 +24,48 @@ document.onkeypress = function(event) {
     }
 }
 
-function isAlpha (ch){
-    return /^[A-Z]$/i.test(ch);
+function isAlpha (ch) {
+    return /^[A-Z]$/i.test(ch);}
+
+
+
+    function checkForLetter(letter) {
+
+    var foundLetter = false
+    var correctSound = document.createElement("audio")
+    var incorrectSound = document.createElement("audio")
+
+    correctSound.setAttribute("src", "assets/sounds")
+    incorrectSound.setAttribute("src","assets/sounds")
+
+ for (var i=0, j= wordToMatch.length; i<j; i++) {
+    if (letter === wordToMatch[i]) {
+        guessingWord[i] = letter;
+        foundLetter = true;
+        correctSound.play();
+    }
+        
+        if (guessingWord.join("") === wordToMatch) {
+            
+            wins++;
+            pauseGame = true;
+            updateDisplay();
+            setTimeout(resetGame,5000);
+        }
+    }    
+ }       
+    
+
+    if (!foundLetter) {
+        incorrectSound.play()
+    
+    if (!guessedLetters.includes(letter)) {
+        guessedLetters.push(letter)
+        numGuess--
+    }
+    if (numGuess === 0) {
+        guessingWord = wordToMatch.split()
+        pauseGame = true
+        setTimeout(resetGame, 5000)
+    }
 }
