@@ -1,3 +1,5 @@
+    
+    
     var pauseGame = false
 
     var guessedLetters = []
@@ -10,23 +12,34 @@
 
     var wins = 0
 
-    var possibleAnswers = ["Red", "Morpheus", "Trinity", "Zion", "Smith"]
+    var possibleAnswers = ["Persephone", "Morpheus", "Trinity", "Neo", "Smith", "Niobe", "Twin"]
 
-
-
+            
     //var possibleQuestions = ["What pill took Neo?", "Who gave Neo's red pill?", "Who was Neo's love?", "Name a city where all people lived beside Matrix? ", "Name main Agent in Matrix"]
 
-    
 
-    const maxGuess = 3
+    const maxGuess = 5
+
 
     resetGame()
+
+
+    //setTimeout(function () {
+        
+        //var startSound = document.createElement("audio")
+        //startSound.setAttribute("src", "assets/sound/spybreak.mp3")
+        //startSound.play()
+	
+    //}, 10);
+    
+     
 
     
     document.onkeypress = function(event) {
         
         if (isAlpha(event.key) && !pauseGame) {
             checkForLetter(event.key.toUpperCase())
+            
         }
     }
 
@@ -36,23 +49,23 @@
         var foundLetter = false
         var correctSound = document.createElement("audio")
         var incorrectSound = document.createElement("audio")
+        
         //var correctPicture = document.createElement("img")
         //var incorrectPicture = document.createElement("img")
-
+        
             correctSound.setAttribute("src", "assets/sound/matrix84.mp3")
             incorrectSound.setAttribute("src","assets/sound/matrix41.wav")
-           //correctPicture.setAttribute("img","assets/img/giphy.gif")
-           //incorrectPicture.setAttribute("img","assets/img/smDUL2.gif")
-            
 
-
-
-
+        //correctPicture.setAttribute("img","assets/img/giphy.gif")
+        //incorrectPicture.setAttribute("img","assets/img/smDUL2.gif")
+           
+        
         
         for (var i=0, j= wordToMatch.length; i<j; i++) {
             if (letter === wordToMatch[i]) {
                 guessingWord[i] = letter
                 foundLetter = true
+                
                 
                 
                 if (guessingWord.join("") === wordToMatch) {
@@ -93,8 +106,8 @@
     function resetGame() {
         numGuess = maxGuess
         pauseGame = false
-
         
+
         wordToMatch = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)].toUpperCase()
         console.log(wordToMatch)
 
@@ -121,4 +134,5 @@
         document.getElementById("currentWord").innerText = guessingWord.join("")
         document.getElementById("remainingGuesses").innerText = numGuess
         document.getElementById("guessedLetters").innerText =  guessedLetters.join(" ")
+        
     }
