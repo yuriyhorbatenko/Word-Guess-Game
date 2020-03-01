@@ -1,27 +1,31 @@
 
 
 body {
+    background-color: black;
     background-image: url(../img/back.jpg);
     height: 100vh;
-    color: rgb(255, 255, 255);
+    color: rgb(48, 202, 86);
     display: flex;
     background-size: cover;
     font-size: 24px;
-    
-    
-    
+}
+
+h1 {
+    font-size: 40px;
+    padding-bottom: 40px;
 }
 
 .container {
-
     margin: auto;
     text-align: center;
-    width: 100%;
+    width: auto;
+    background-color: rgba(0, 0, 0, 0.884);
+    letter-spacing: 5px;
+    padding: 40px;
+    border-radius: 10px;
 }
 
 
 #currentWord {
-
     letter-spacing: 20px;
-
 }

@@ -1,71 +1,124 @@
+    var pauseGame = false
 
+    var guessedLetters = []
 
-var questions = [
-    { q: "What pill took Neo?", a: "Red" },
-    { q: "Who gave Neo s red pill?", a: "Morpheus" },
-    { q: "Who was Neo's love?", a: "Trinity" },
-    { q: "Name a city where all people lived beside Matrix? ", a: "Zion" },
-    { q: "Name main Agent in Matrix", a: "Smith" }
-  ];
-  console.log(questions)
+    var guessingWord = []
 
-const maxGuess = 3
+    var wordToMatch
 
-var pauseGame = false
-var answeredQuestions = []
-var guessingWord = []
-var wordToMatch
-var numGuess
-var wins = 0
+    var numGuess
 
-document.onkeypress = function(event) {
-    if (isAlpha(event.key) && !pauseGame) {
-        checkForLetter(event.key.toUpperCase())
-    }
-}
+    var wins = 0
 
-function isAlpha (ch) {
-    return /^[A-Z]$/i.test(ch);}
+    var possibleAnswers = ["Red", "Morpheus", "Trinity", "Zion", "Smith"]
 
 
 
-    function checkForLetter(letter) {
+    //var possibleQuestions = ["What pill took Neo?", "Who gave Neo's red pill?", "Who was Neo's love?", "Name a city where all people lived beside Matrix? ", "Name main Agent in Matrix"]
 
-    var foundLetter = false
-    var correctSound = document.createElement("audio")
-    var incorrectSound = document.createElement("audio")
+    
 
-    correctSound.setAttribute("src", "assets/sounds")
-    incorrectSound.setAttribute("src","assets/sounds")
+    const maxGuess = 3
 
- for (var i=0, j= wordToMatch.length; i<j; i++) {
-    if (letter === wordToMatch[i]) {
-        guessingWord[i] = letter;
-        foundLetter = true;
-        correctSound.play();
-    }
+    resetGame()
+
+    
+    document.onkeypress = function(event) {
         
-        if (guessingWord.join("") === wordToMatch) {
-            
-            wins++;
-            pauseGame = true;
-            updateDisplay();
-            setTimeout(resetGame,5000);
+        if (isAlpha(event.key) && !pauseGame) {
+            checkForLetter(event.key.toUpperCase())
         }
-    }    
- }       
-    
+    }
 
-    if (!foundLetter) {
-        incorrectSound.play()
     
-    if (!guessedLetters.includes(letter)) {
-        guessedLetters.push(letter)
-        numGuess--
+    function checkForLetter(letter) {
+        
+        var foundLetter = false
+        var correctSound = document.createElement("audio")
+        var incorrectSound = document.createElement("audio")
+        //var correctPicture = document.createElement("img")
+        //var incorrectPicture = document.createElement("img")
+
+            correctSound.setAttribute("src", "assets/sound/matrix84.mp3")
+            incorrectSound.setAttribute("src","assets/sound/matrix41.wav")
+           //correctPicture.setAttribute("img","assets/img/giphy.gif")
+           //incorrectPicture.setAttribute("img","assets/img/smDUL2.gif")
+            
+
+
+
+
+        
+        for (var i=0, j= wordToMatch.length; i<j; i++) {
+            if (letter === wordToMatch[i]) {
+                guessingWord[i] = letter
+                foundLetter = true
+                
+                
+                if (guessingWord.join("") === wordToMatch) {
+                    wins++
+                    pauseGame = true
+                    correctSound.play()
+                    updateDisplay()
+                    setTimeout(resetGame,3000)
+                }
+            }
+        }
+                if (!foundLetter) {
+            
+            
+                if (!guessedLetters.includes(letter)) {
+                    guessedLetters.push(letter)
+                    numGuess--
+                    
+                }
+                 
+                if (numGuess === 0) {
+                    guessingWord = wordToMatch.split()
+                    pauseGame = true
+                    incorrectSound.play()
+                    setTimeout(resetGame, 4000)
+                    
+            }
+        }
+        
+        updateDisplay()
+
     }
-    if (numGuess === 0) {
-        guessingWord = wordToMatch.split()
-        pauseGame = true
-        setTimeout(resetGame, 5000)
+    
+    function isAlpha (ch){
+        return /^[A-Z]$/i.test(ch);
     }
-}
+
+    function resetGame() {
+        numGuess = maxGuess
+        pauseGame = false
+
+        
+        wordToMatch = possibleAnswers[Math.floor(Math.random() * possibleAnswers.length)].toUpperCase()
+        console.log(wordToMatch)
+
+        
+        guessedLetters = []
+        guessingWord = []
+
+        
+        for (var i=0, j=wordToMatch.length; i < j; i++){
+            
+            if (wordToMatch[i] === " ") {
+                guessingWord.push(" ")
+            } else {
+                guessingWord.push("_")
+            }
+        }
+
+        
+        updateDisplay()
+    }
+
+    function updateDisplay () {
+        document.getElementById("totalWins").innerText = wins
+        document.getElementById("currentWord").innerText = guessingWord.join("")
+        document.getElementById("remainingGuesses").innerText = numGuess
+        document.getElementById("guessedLetters").innerText =  guessedLetters.join(" ")
+    }
