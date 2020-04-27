@@ -12,7 +12,7 @@
 
     var wins = 0
 
-    var possibleAnswers = ["Persephone", "Morpheus", "Trinity", "Neo", "Smith", "Niobe", "Twin"]
+    var possibleAnswers = ["Persephone", "Morpheus", "Trinity", "Neo", "Smith", "Niobe", "Twins"]
 
     const maxGuess = 5
 
@@ -38,7 +38,7 @@
             correctSound.setAttribute("src", "music/matrix84.mp3")
             incorrectSound.setAttribute("src","music/matrix41.wav")
          
-        for (var i=0; wordToMatch.length; i++) {
+        for (var i=0; i < wordToMatch.length; i++) {
             if (letter === wordToMatch[i]) {
                 guessingWord[i] = letter
                 foundLetter = true
