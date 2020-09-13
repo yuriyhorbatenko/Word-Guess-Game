@@ -1,7 +1,5 @@
 # Word Guess Game
 
-https://yuriyhorbatenko.github.io/Word-Guess-Game
-
 **The Matrix Game**
 
 **Unit 3: Advanced Assignment**
@@ -11,6 +9,10 @@ https://yuriyhorbatenko.github.io/Word-Guess-Game
 ![](img/screen.jpg)
 
 **Good Luck & Enjoy**
+
+Link to Github Deployment:
+
+https://yuriyhorbatenko.github.io/Word-Guess-Game
 
 Languages & Technologies used:
 **HTML, CSS, Javascript.**
